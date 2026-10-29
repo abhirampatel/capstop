@@ -1,0 +1,4 @@
+# Source for requirements.lock. Runtime deps from pyproject.toml + setuptools (build backend, for --no-build-isolation).
+# Regenerate: uv pip compile requirements.in --universal --python-version 3.11 --generate-hashes -o requirements.lock
+aiohttp>=3.12.14,<4
+setuptools>=61

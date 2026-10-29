@@ -1,0 +1,61 @@
+{
+  "_status": "VERIFIED 2026-10-29 against https://platform.openai.com/docs/pricing (Standard tier, text tokens, USD per 1M tokens; read from the page's embedded pricing table). openai.com/api/pricing returned 403. Cached input is billed at the cached_input_per_1m rate (Capstop currently bills all input at input_per_1m, which overestimates = safe). Billing of aborted/cancelled streams: not documented on the pages opened.",
+  "models": {
+    "gpt-4o": {
+      "input_per_1m": 2.5,
+      "cached_input_per_1m": 1.25,
+      "output_per_1m": 10,
+      "source_url": "https://platform.openai.com/docs/pricing",
+      "checked_date": "2026-10-29"
+    },
+    "gpt-4o-mini": {
+      "input_per_1m": 0.15,
+      "cached_input_per_1m": 0.075,
+      "output_per_1m": 0.6,
+      "source_url": "https://platform.openai.com/docs/pricing",
+      "checked_date": "2026-10-29"
+    },
+    "gpt-4.1": {
+      "input_per_1m": 2,
+      "cached_input_per_1m": 0.5,
+      "output_per_1m": 8,
+      "source_url": "https://platform.openai.com/docs/pricing",
+      "checked_date": "2026-10-29"
+    },
+    "gpt-4.1-mini": {
+      "input_per_1m": 0.4,
+      "cached_input_per_1m": 0.1,
+      "output_per_1m": 1.6,
+      "source_url": "https://platform.openai.com/docs/pricing",
+      "checked_date": "2026-10-29"
+    },
+    "gpt-4.1-nano": {
+      "input_per_1m": 0.1,
+      "cached_input_per_1m": 0.025,
+      "output_per_1m": 0.4,
+      "source_url": "https://platform.openai.com/docs/pricing",
+      "checked_date": "2026-10-29"
+    },
+    "gpt-5": {
+      "input_per_1m": 1.25,
+      "cached_input_per_1m": 0.125,
+      "output_per_1m": 10,
+      "source_url": "https://platform.openai.com/docs/pricing",
+      "checked_date": "2026-10-29"
+    },
+    "gpt-5-mini": {
+      "input_per_1m": 0.25,
+      "cached_input_per_1m": 0.025,
+      "output_per_1m": 2,
+      "source_url": "https://platform.openai.com/docs/pricing",
+      "checked_date": "2026-10-29"
+    },
+    "gpt-5-nano": {
+      "input_per_1m": 0.05,
+      "cached_input_per_1m": 0.005,
+      "output_per_1m": 0.4,
+      "source_url": "https://platform.openai.com/docs/pricing",
+      "checked_date": "2026-10-29"
+    }
+  }
+}

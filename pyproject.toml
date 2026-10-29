@@ -1,0 +1,26 @@
+[project]
+name = "capstop"
+version = "0.1.0"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dependencies = ["aiohttp>=3.12.14,<4"]
+
+[project.optional-dependencies]
+test = ["pytest", "openai", "ruff"]
+
+[project.scripts]
+capstop = "capstop.cli:main"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["capstop*"]
+
+[tool.setuptools.package-data]
+capstop = ["prices.json"]
+
+[tool.ruff]
+line-length = 110
