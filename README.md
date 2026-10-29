@@ -18,32 +18,31 @@ It supports OpenAI Chat Completions only (`POST /v1/chat/completions`), streamed
 
 ## Your API key
 
-Your agent sends its own OpenAI key as usual, in `Authorization: Bearer ...`. Capstop forwards it to OpenAI and does not store or log it. It never reads a key from a file or the environment. The key stays on your machine.
+Your agent sends its own OpenAI key as usual, in `Authorization: Bearer ...`. Capstop forwards it to OpenAI and does not store or log it. It never reads a key from a file or the environment. Your API key goes only to OpenAI. It's never stored or logged.
 
 ## Install
 
 You need Linux, bash and Python 3.11 or newer with `venv` (on Debian or Ubuntu: `apt install python3-venv`).
 
-There is no separate install step. `run.sh` creates `.venv` in `backend/`, installs the pinned dependencies from `requirements.lock` with hash checking, then installs the project. Later runs skip this unless the lock file or code changed. To only set up the environment:
-
 ```
-cd backend
+git clone https://github.com/abhirampatel/capstop
+cd capstop
 ./run.sh setup
 ```
+
+`./run.sh setup` creates `.venv` in the repo folder, installs the pinned dependencies from `requirements.lock` with hash checking, then installs the project. The other modes do this too if needed, so `setup` is optional. Later runs skip it unless the lock file or code changed.
 
 ## Run
 
 No-key demo, with a fake OpenAI server on port 9999:
 
 ```
-cd backend
 ./run.sh fake
 ```
 
 Real use, forwarding to `https://api.openai.com`:
 
 ```
-cd backend
 ./run.sh
 ```
 
@@ -55,7 +54,7 @@ Environment variables read by `run.sh`:
 |---|---|---|
 | `CAPSTOP_UPSTREAM` | `https://api.openai.com` | Where `./run.sh` forwards to |
 | `CAPSTOP_FAKE_PORT` | `9999` | Fake server port in fake mode |
-| `CAPSTOP_VENV` | `backend/.venv` | Virtual environment path |
+| `CAPSTOP_VENV` | `.venv` in the repo folder | Virtual environment path |
 | `PYTHON` | `python3` | Python used to create the venv |
 
 `.env.example` lists them. `run.sh` does not load it on its own.

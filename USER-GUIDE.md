@@ -5,7 +5,9 @@ Capstop stops an agent run once it has spent a set amount on OpenAI. This guide 
 ## Try it without a key
 
 ```
-cd backend
+git clone https://github.com/abhirampatel/capstop
+cd capstop
+./run.sh setup
 ./run.sh fake
 ```
 
@@ -16,7 +18,6 @@ This starts a fake OpenAI server and Capstop on `http://127.0.0.1:8787`. No real
 1. Start it:
 
    ```
-   cd backend
    ./run.sh
    ```
 
@@ -49,7 +50,7 @@ A run's cap is set by its first call and cannot be raised later. To continue, st
 curl -s http://127.0.0.1:8787/runs/nightly-42
 ```
 
-Or, from `backend/`, `.venv/bin/capstop runs` lists every run.
+Or, from the repo folder, `.venv/bin/capstop runs` lists every run.
 
 ## Change the defaults
 

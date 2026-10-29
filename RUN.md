@@ -5,10 +5,11 @@ Needs Python >= 3.11 (`pyproject.toml`) and bash. Tested on Linux only (box: Pyt
 
 ## One command
 ```
-cd backend
+git clone https://github.com/abhirampatel/capstop
+cd capstop
+./run.sh setup    # only build/refresh .venv
 ./run.sh fake     # no-key demo: fake upstream on 127.0.0.1:9999 + Capstop on 127.0.0.1:8787
 ./run.sh          # real: capstop serve --upstream ${CAPSTOP_UPSTREAM:-https://api.openai.com} on 127.0.0.1:8787
-./run.sh setup    # only build/refresh .venv
 ```
 `run.sh` creates `.venv`, installs `requirements.lock` with `pip --require-hashes`, then the project with `--no-deps`.
 Re-runs skip the install unless the lock or code changed. Extra args go to `capstop serve`, e.g. `./run.sh fake --port 8800`.

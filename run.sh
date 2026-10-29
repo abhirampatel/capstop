@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One-command setup + run for capstop (Linux/macOS shell; Windows UNTESTED).
+# One-command setup + run for capstop (tested on Linux only; macOS and Windows UNTESTED).
 #   ./run.sh                -> capstop serve (needs CAPSTOP_UPSTREAM, default https://api.openai.com)
 #   ./run.sh fake           -> no-key demo: capstop fake on :9999 + capstop serve on :8787 pointed at it
 #   ./run.sh setup          -> only create/refresh the venv
