@@ -19,17 +19,54 @@ Capstop checks every call against its run's cap before forwarding it. A run that
 
 You need Linux, bash and Python 3.11 or newer with `venv` (on Debian or Ubuntu: `apt install python3-venv`).
 
+### Try it without a key
+
 ```
 git clone https://github.com/abhirampatel/capstop
 cd capstop
-./run.sh setup   # create .venv and install pinned dependencies
-./run.sh fake    # no-key demo: fake OpenAI on :9999, Capstop on :8787
-./run.sh         # real use: forwards to https://api.openai.com
+./run.sh setup
+./run.sh fake
 ```
 
-`setup` is optional; the other modes install on first run. Both `fake` and the default mode listen on `127.0.0.1:8787`. Stop with Ctrl-C. Extra arguments go to `capstop serve`, for example `./run.sh fake --port 8800`.
+`./run.sh fake` starts a fake OpenAI server on `127.0.0.1:9999` and Capstop on `127.0.0.1:8787`. Leave it running. The first run takes a few seconds to build `.venv`. No real calls are made.
 
-Point your OpenAI client at Capstop and name the run:
+In a second terminal, in the same folder, run the example agent. It is a loop that keeps calling `gpt-4o-mini` with a $0.005 cap on its run (`--cap` changes it). It needs the `openai` package. Most Linux systems block a plain `pip install`, so use a throwaway venv:
+
+```
+python3 -m venv /tmp/capstop-example
+/tmp/capstop-example/bin/pip install openai
+/tmp/capstop-example/bin/python3 examples/agent.py
+```
+
+Output. The numbers are computed from the fake server, which reports 1,000 prompt and 500 completion tokens per call ($0.00045 at the bundled prices):
+
+```
+run runaway-20261029-182028, cap $0.005
+call   1  ok   spent $0.000450
+call   2  ok   spent $0.000900
+call   3  ok   spent $0.001350
+call   4  ok   spent $0.001800
+call   5  ok   spent $0.002250
+call   6  ok   spent $0.002700
+call   7  ok   spent $0.003150
+call   8  ok   spent $0.003600
+call   9  ok   spent $0.004050
+call  10  ok   spent $0.004500
+call  11  ok   spent $0.004950
+call  12  STOPPED: run_budget_exceeded (spent $0.004950 of $0.005)
+```
+
+Call 12 would have gone over the cap, so Capstop refused it with HTTP 402 and the loop ended. Stop the demo with Ctrl-C in the first terminal.
+
+### Use it with real OpenAI
+
+Stop the demo first; both modes use port 8787. Then:
+
+```
+./run.sh
+```
+
+This forwards to `https://api.openai.com`. Put your own API key in your client, not in Capstop. Point the client at Capstop and name the run:
 
 ```python
 from openai import OpenAI
@@ -39,6 +76,18 @@ client = OpenAI(
     default_headers={"X-Run-Id": "agent-run-1", "X-Run-Cap-USD": "0.50"},
 )
 ```
+
+`setup` is optional; the other modes install on first run. Stop with Ctrl-C. Extra arguments go to `capstop serve`, for example `./run.sh --port 8800`.
+
+## Repository layout
+
+| Path | What it is |
+|---|---|
+| `run.sh` | Setup and run script |
+| `capstop/` | The proxy (`cli.py`, `proxy.py`, `ledger.py`, `fake.py`, `prices.json`) |
+| `examples/agent.py` | Runaway-agent demo for `./run.sh fake` |
+| `tests/` | Test suite |
+| `RUN.md`, `USER-GUIDE.md`, `SECURITY.md` | More docs |
 
 ## Usage
 

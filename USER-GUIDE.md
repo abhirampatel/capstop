@@ -11,11 +11,21 @@ cd capstop
 ./run.sh fake
 ```
 
-This starts a fake OpenAI server and Capstop on `http://127.0.0.1:8787`. No real calls are made and nothing is charged. Stop it with Ctrl-C.
+This starts a fake OpenAI server and Capstop on `http://127.0.0.1:8787`. Leave it running. No real calls are made and nothing is charged.
+
+In a second terminal, in the same folder, run the example agent (it needs `openai`, installed here in a throwaway venv):
+
+```
+python3 -m venv /tmp/capstop-example
+/tmp/capstop-example/bin/pip install openai
+/tmp/capstop-example/bin/python3 examples/agent.py
+```
+
+It loops until Capstop stops it at the $0.005 cap with `run_budget_exceeded`. See `README.md` for the full output. Stop the demo with Ctrl-C in the first terminal.
 
 ## Use it with OpenAI
 
-1. Start it:
+1. Stop the demo if it is running (both use port 8787), then start Capstop:
 
    ```
    ./run.sh
